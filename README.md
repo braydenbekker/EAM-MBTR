@@ -49,4 +49,4 @@ My current research is with the recently proposed Many Body Tensor Representatio
 
 - Use results to train and predict in MBTR
 
-Full API Documentation available at: [github pages](https://braydenbekker.github.io/eamEnergies/). 
+Full API Documentation available at: [github pages](https://github.com/braydenbekker/braydenbekker.github.io/blob/master/eamEnergies/html/index.html). 
