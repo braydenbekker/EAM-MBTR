@@ -30,7 +30,7 @@ setup(name='eamEnergies',
       install_requires=[
           "numpy",
       ],
-      packages=['trial.py'],
+      packages=['eamEnergies'],
       # scripts=[''],
       include_package_data=True,
       classifiers=[
