@@ -48,3 +48,5 @@ My current research is with the recently proposed Many Body Tensor Representatio
 - Save the data for each system to a HDF5 file for ease of data access.
 
 - Use results to train and predict in MBTR
+
+Full API Documentation available at: [github pages](https://braydenbekker.github.io/eamEnergies/). 
