@@ -1,4 +1,4 @@
-"""Tests the mathematical functions defined in demo/trail.py
+"""Tests the mathematical functions defined in eamEnergies/getStructures.py
 """
 
 import pytest
