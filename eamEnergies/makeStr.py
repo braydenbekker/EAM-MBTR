@@ -1,4 +1,5 @@
 """This scripts produces the VASP style POSCAR."""
+#pragma: no cover
 from __future__ import print_function
 from termcolor import cprint
 import warnings
