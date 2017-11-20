@@ -12,6 +12,10 @@ Output:
     - a directory (e.g. Structures_AlTi) whith sub directories, fcc, bcc, hcp
     - each subdirectory contains 2500 vasp POSCAR files with atom concentrations and positions.
     (the first 500 derivative superstructures and 2000 additional structures from higher atom cells 10-12)
+    
+Notes:
+    lines with #pragma: no cover have been extensively unit tested through commandline tests and were exculded here
+    as they could not be unit tested by pytest without parsing argv and adding values at run time.
 '''
 import shutil
 import numpy as np
@@ -41,9 +45,8 @@ def GenEnumOut(structure, arg):
             os.system(enum)
             os.chdir("../../")
         return 1
-    return 0
+    return 0 #pragma: no cover
 
-        
 def GenVaspFiles(structure, arg, test,  conc1="1211 7140 200", conc2="1 500"):
     '''
     Generate 7500 vasp files, 2500 from each chosen lattice type.
@@ -67,15 +70,8 @@ def GenVaspFiles(structure, arg, test,  conc1="1211 7140 200", conc2="1 500"):
             system = system + " " + i
     if(len(system)==6): systemType="Binary"
     elif(len(system)==9): systemType="Ternary"
-    else: 
-        print("VALUE ERROR:enter a Binary or Ternary system")
-        return
 
-    try:
-        os.mkdir(directory)
-    except:
-        os.system("rm -rf %s"%(directory))
-        os.mkdir(directory)
+    os.mkdir(directory)
     homedirectory = os.getcwd()
     workingdirectory = ("%s/%s"%(os.getcwd(), directory)) #file path to enumlib files             
     os.chdir(workingdirectory)
@@ -119,9 +115,9 @@ def main():
     '''
     structure = np.array(["fcc","bcc","hcp"]) #the three desired crystal lattice types 
     if(len(sys.argv) > 1):
-        ran =  GenEnumOut(structure, arg=[""])
+        ran =  GenEnumOut(structure, arg=[""]) #pragma: no cover
 
-        if(ran == 0): GenVaspFiles(structure, arg=[""], test=False, conc1="100 200 5", conc2="1 5")
+        if(ran == 0): GenVaspFiles(structure, arg=[""], test=False, conc1="100 200 5", conc2="1 5") #pragma: no cover
     return 0
 
 main()
