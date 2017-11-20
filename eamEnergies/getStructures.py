@@ -19,7 +19,7 @@ import os
 import random
 import sys
 
-def GenEnumOut(structure):
+def GenEnumOut(structure, arg):
     '''
     Compute the struct_enum.out vasp file.
 
@@ -29,16 +29,22 @@ def GenEnumOut(structure):
     Returns:
         enum_'lattice'/'Binary or Ternary'/Struct_enum.out
     '''
-    for lattice in structure:
-        os.chdir("enum_%s/%s/"%(lattice, sys.argv[1]))
+    if(len(sys.argv)>1): arg = sys.argv 
 
-        input_file=('struct_enum.in')
-                           
-        enum="./../../enum.x %s" %(input_file)
-        os.system(enum)
-        os.chdir("../../")
+    if(len(arg[1])>2): 
+        for lattice in structure:
+            os.chdir("enum_%s/%s/"%(lattice, arg[1]))
 
-def GenVaspFiles(structure, conc1="1211 7140 200", conc2="1 500"):
+            input_file=('struct_enum.in')
+        
+            enum="./../../enum.x %s" %(input_file)
+            os.system(enum)
+            os.chdir("../../")
+        return 1
+    return 0
+
+        
+def GenVaspFiles(structure, arg, test,  conc1="1211 7140 200", conc2="1 500"):
     '''
     Generate 7500 vasp files, 2500 from each chosen lattice type.
 
@@ -49,11 +55,12 @@ def GenVaspFiles(structure, conc1="1211 7140 200", conc2="1 500"):
     Returns:
         Structure_'system'/'fcc/, bcc/, hcp'/vasp.num where num=1-2500
     '''
+    if(len(sys.argv)>1): arg = sys.argv
 
     elements = []
     system = ""
     directory="Structures_"
-    for i in sys.argv:
+    for i in arg:
         elements.append(i) #get the selected elements from command line                                        
         if(len(i)==2): 
             directory=(directory + "%s"%(i))
@@ -64,7 +71,11 @@ def GenVaspFiles(structure, conc1="1211 7140 200", conc2="1 500"):
         print("VALUE ERROR:enter a Binary or Ternary system")
         return
 
-    os.mkdir(directory)
+    try:
+        os.mkdir(directory)
+    except:
+        os.system("rm -rf %s"%(directory))
+        os.mkdir(directory)
     homedirectory = os.getcwd()
     workingdirectory = ("%s/%s"%(os.getcwd(), directory)) #file path to enumlib files             
     os.chdir(workingdirectory)
@@ -86,6 +97,8 @@ def GenVaspFiles(structure, conc1="1211 7140 200", conc2="1 500"):
         os.system("rm struct_enum.out")
         os.chdir("../")
 
+    return 1
+
 def main():
     '''
     enumlib computes the derivative superstructures of a system. 
@@ -105,9 +118,10 @@ def main():
                        second 500-2500 sampled  randomly for 10-12 atom cells or more generally between 1211-7140  
     '''
     structure = np.array(["fcc","bcc","hcp"]) #the three desired crystal lattice types 
-    
-    if(len(sys.argv[1])>2): GenEnumOut(structure)
+    if(len(sys.argv) > 1):
+        ran =  GenEnumOut(structure, arg=[""])
 
-    else: GenVaspFiles(structure, conc1="100 200 5",conc2="1 5")
-    
+        if(ran == 0): GenVaspFiles(structure, arg=[""], test=False, conc1="100 200 5", conc2="1 5")
+    return 0
+
 main()
