@@ -70,8 +70,10 @@ def GenVaspFiles(structure, arg, test,  conc1="1211 7140 200", conc2="1 500"):
             system = system + " " + i
     if(len(system)==6): systemType="Binary"
     elif(len(system)==9): systemType="Ternary"
-
-    os.mkdir(directory)
+    
+    try:
+        os.mkdir(directory)
+        
     homedirectory = os.getcwd()
     workingdirectory = ("%s/%s"%(os.getcwd(), directory)) #file path to enumlib files             
     os.chdir(workingdirectory)
