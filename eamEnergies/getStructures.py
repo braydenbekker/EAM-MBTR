@@ -73,7 +73,10 @@ def GenVaspFiles(structure, arg, test,  conc1="1211 7140 200", conc2="1 500"):
     
     try:
         os.mkdir(directory)
-        
+    except OSError:
+        os.system("rm -rf %s"%(directory))
+        os.mkdir(directory)
+    
     homedirectory = os.getcwd()
     workingdirectory = ("%s/%s"%(os.getcwd(), directory)) #file path to enumlib files             
     os.chdir(workingdirectory)
