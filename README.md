@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/braydenbekker/EAM-MBTR.svg?branch=master)](https://travis-ci.org/braydenbekker/EAM-MBTR)
 [![codecov](https://codecov.io/gh/braydenbekker/EAM-MBTR/branch/master/graph/badge.svg)](https://codecov.io/gh/braydenbekker/EAM-MBTR)
-[![Code Health](https://landscape.io/github/braydenbekker/EAM-MBTR/master/landscape.svg?style=flat)](https://landscape.io/github/braydenbekker/EAM-MBTR/master)
 ## My Research Impact
 
 
