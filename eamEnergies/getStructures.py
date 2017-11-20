@@ -73,7 +73,7 @@ def GenVaspFiles(structure, arg, test,  conc1="1211 7140 200", conc2="1 500"):
     
     try:
         os.mkdir(directory)
-    except OSError:
+    except OSError: #pragma: no cover
         os.system("rm -rf %s"%(directory))
         os.mkdir(directory)
     
